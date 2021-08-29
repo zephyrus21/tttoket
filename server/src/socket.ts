@@ -7,5 +7,8 @@ export default (httpServer: any) => {
       origin: "*",
     },
   });
-  // useSocketServer(io, { controllers: [__dirname + "/api/controllers/*.ts"] });
+
+  useSocketServer(io, { controllers: [__dirname + "/api/controllers/*.ts"] });
+
+  return io;
 };
