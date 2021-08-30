@@ -30,6 +30,7 @@ const MainContainer = styled.div`
 
 const App: React.FC = ({}) => {
   const [isInRoom, setIsInRoom] = useState(false);
+  const [playerSymbol, setPlayerSymbol] = useState<"x" | "o">("x");
 
   const connectSocket = async () => {
     const socket = await socketService
@@ -46,6 +47,12 @@ const App: React.FC = ({}) => {
   const gameContextValue: IGameContextProps = {
     isInRoom,
     setIsInRoom,
+    playerSymbol,
+    setPlayerSymbol,
+    // isPlayerTurn,
+    // setPlayerTurn,
+    // isGameStarted,
+    // setGameStarted,
   };
 
   return (

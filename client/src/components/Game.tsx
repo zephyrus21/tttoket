@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components";
+import store from "../context/store";
 
 const GameContainer = styled.div`
   display: flex;
@@ -72,34 +73,36 @@ export interface IStartGame {
 interface GameProps {}
 
 const Game: React.FC<GameProps> = ({}) => {
-  const [matrix, setMatrix] = useState([
+  const [matrix, setMatrix] = useState<IPlayMatrix>([
     [null, null, null],
     [null, null, null],
     [null, null, null],
   ]);
 
-  // const updateGameMatrix = (column: number, row: number, symbol: "x" | "o") => {
-  //   const newMatrix = [...matrix];
+  const { playerSymbol, setPlayerSymbol } = useContext(store);
 
-  //   if (newMatrix[row][column] === null || newMatrix[row][column] === "null") {
-  //     newMatrix[row][column] = symbol;
-  //     setMatrix(newMatrix);
-  //   }
+  const updateGameMatrix = (column: number, row: number, symbol: "x" | "o") => {
+    const newMatrix = [...matrix];
 
-  //   if (socketService.socket) {
-  //     gameService.updateGame(socketService.socket, newMatrix);
-  //     const [currentPlayerWon, otherPlayerWon] = checkGameState(newMatrix);
-  //     if (currentPlayerWon && otherPlayerWon) {
-  //       gameService.gameWin(socketService.socket, "The Game is a TIE!");
-  //       alert("The Game is a TIE!");
-  //     } else if (currentPlayerWon && !otherPlayerWon) {
-  //       gameService.gameWin(socketService.socket, "You Lost!");
-  //       alert("You Won!");
-  //     }
+    if (newMatrix[row][column] === null || newMatrix[row][column] === "null") {
+      newMatrix[row][column] = symbol;
+      setMatrix(newMatrix);
+    }
 
-  //     setPlayerTurn(false);
-  //   }
-  // };
+    // if (socketService.socket) {
+    //   gameService.updateGame(socketService.socket, newMatrix);
+    //   const [currentPlayerWon, otherPlayerWon] = checkGameState(newMatrix);
+    //   if (currentPlayerWon && otherPlayerWon) {
+    //     gameService.gameWin(socketService.socket, "The Game is a TIE!");
+    //     alert("The Game is a TIE!");
+    //   } else if (currentPlayerWon && !otherPlayerWon) {
+    //     gameService.gameWin(socketService.socket, "You Lost!");
+    //     alert("You Won!");
+    //   }
+
+    //   setPlayerTurn(false);
+    // }
+  };
 
   return (
     <GameContainer>
