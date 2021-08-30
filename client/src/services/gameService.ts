@@ -1,4 +1,5 @@
 import { Socket } from "socket.io-client";
+import { IPlayMatrix, IStartGame } from "../components/Game";
 
 class GameService {
   public async joinGameRoom(socket: Socket, roomId: string): Promise<boolean> {
@@ -9,31 +10,31 @@ class GameService {
     });
   }
 
-  // public async updateGame(socket: Socket, gameMatrix: IPlayMatrix) {
-  //   socket.emit("update_game", { matrix: gameMatrix });
-  // }
+  public async updateGame(socket: Socket, gameMatrix: IPlayMatrix) {
+    socket.emit("update_game", { matrix: gameMatrix });
+  }
 
-  // public async onGameUpdate(
-  //   socket: Socket,
-  //   listiner: (matrix: IPlayMatrix) => void
-  // ) {
-  //   socket.on("on_game_update", ({ matrix }) => listiner(matrix));
-  // }
+  public async onGameUpdate(
+    socket: Socket,
+    listiner: (matrix: IPlayMatrix) => void
+  ) {
+    socket.on("on_game_update", ({ matrix }) => listiner(matrix));
+  }
 
-  // public async onStartGame(
-  //   socket: Socket,
-  //   listiner: (options: IStartGame) => void
-  // ) {
-  //   socket.on("start_game", listiner);
-  // }
+  public async onStartGame(
+    socket: Socket,
+    listiner: (options: IStartGame) => void
+  ) {
+    socket.on("start_game", listiner);
+  }
 
-  // public async gameWin(socket: Socket, message: string) {
-  //   socket.emit("game_win", { message });
-  // }
+  public async gameWin(socket: Socket, message: string) {
+    socket.emit("game_win", { message });
+  }
 
-  // public async onGameWin(socket: Socket, listiner: (message: string) => void) {
-  //   socket.on("on_game_win", ({ message }) => listiner(message));
-  // }
+  public async onGameWin(socket: Socket, listiner: (message: string) => void) {
+    socket.on("on_game_win", ({ message }) => listiner(message));
+  }
 }
 
 export default new GameService();

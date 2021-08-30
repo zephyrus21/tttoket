@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-
-import "./App.css";
 import Game from "./components/Game";
 import JoinRoom from "./components/JoinRoom";
 import GameContext, { IGameContextProps } from "./context/store";
 import socketService from "./services/socketService";
+import "./App.css";
 
 const AppContainer = styled.div`
   width: 100%;
@@ -31,6 +30,8 @@ const MainContainer = styled.div`
 const App: React.FC = ({}) => {
   const [isInRoom, setIsInRoom] = useState(false);
   const [playerSymbol, setPlayerSymbol] = useState<"x" | "o">("x");
+  const [isPlayerTurn, setPlayerTurn] = useState(false);
+  const [isGameStarted, setGameStarted] = useState(false);
 
   const connectSocket = async () => {
     const socket = await socketService
@@ -49,10 +50,10 @@ const App: React.FC = ({}) => {
     setIsInRoom,
     playerSymbol,
     setPlayerSymbol,
-    // isPlayerTurn,
-    // setPlayerTurn,
-    // isGameStarted,
-    // setGameStarted,
+    isPlayerTurn,
+    setPlayerTurn,
+    isGameStarted,
+    setGameStarted,
   };
 
   return (
