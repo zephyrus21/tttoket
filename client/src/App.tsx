@@ -35,7 +35,7 @@ const App: React.FC = ({}) => {
 
   const connectSocket = async () => {
     const socket = await socketService
-      .connect("http://localhost:9000")
+      .connect("https://tttoket-server.herokuapp.com") //* https://tttoket-server.herokuapp.com/
       .catch((err) => {
         console.log("Error: ", err);
       });
